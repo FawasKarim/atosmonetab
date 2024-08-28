@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="">
+<link rel="stylesheet" href="../css/eleve/lister.css">
+<head th:insert="~{fragments/fragment :: head}">
+
+</head>
+<body>
+<div class="sidebar" th:insert="~{fragments/fragment :: sidebar}">
+
+</div>
+
+<div class="main-content">
+    <main>
+        <header class="header">
+            <h1>Élèves (<span th:text="${students.size()}"></span>)</h1>
+            <a th:href="@{/students/add}"> <img src="../icon/plus.png" style="width: 10px;height: 10px" alt=""> Nouvel élève</a>
+        </header>
+        <section class="table-section">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <!--<th>Genre</th>-->
+                    <th>Classe</th>
+                    <th>Date de Naissance</th>
+                    <th>Téléphone</th>
+
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student:${students}">
+                    <td th:text="${student.firstName}"></td>
+                    <td th:text="${student.lastName}"></td>
+                    <!--<td th:text="${student.sexe ? 'Masculin' : 'Feminin' }"></td> -->
+                    <td th:text="${student.classe}"></td>
+                    <!--<td th:text="${student.matricule}"></td> -->
+                    <td th:text="${student.dateNaissance}"></td>
+                    <td th:text="${student.tel}"></td>
+                    <!--<td th:text="${student.ville}"></td> -->
+                    <td th:text="${student.email}"></td>
+                    <td>
+                        <a th:href="@{students/{id}(id=${student.id})}">
+                            <button class="edit-btn">Modifier</button>
+                        </a>
+
+                        <button class="delete-btn">Supprimer</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</div>
+<!-- Modal de confirmation -->
+<div id="confirmationModal" class="modal" th:each="student : ${students}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>ATTENTION !!!</h2>
+        </div>
+        <div class="modal-body">
+            <p>Voulez-vous supprimer cet élève ?</p>
+        </div>
+        <form th:action="@{/students/delete/{id}(id=${student.id})}" method="post">
+            <div class="modal-footer">
+                <button id="confirmYes" class="modal-btn yes-btn">Oui</button>
+                <button id="confirmNo" class="modal-btn no-btn">Non</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<th:block th:insert="~{fragments/fragment :: script-modal}"></th:block>
+</body>
+</html>

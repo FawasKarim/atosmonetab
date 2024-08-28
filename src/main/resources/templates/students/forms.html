@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<link rel="stylesheet" href="../css/eleve/ajouter.css">
+<head th:insert="~{fragments/fragment :: head}">
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <img src="../icon/etablissement.png"  style="width: 50px;height: 50px;margin-right: 10px" alt="Mon Etab Logo">
+        <h2>Mon Etab</h2>
+    </div>
+    <ul class="menu">
+        <hr>
+        <li ><a href="../Home.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-grid-3x2-gap-fill" viewBox="0 0 16 16">
+            <path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+        </svg> Tableau de bord</a></li>
+        <li class="active"><a href="lister_eleve.html"><img src="../icon/eleve.png" style="width: 30px;height: 30px" alt=""> Élèves</a></li>
+        <li><a href="../Professeur/lister_professeur.html"><img src="../icon/professeur.png" style="width: 30px;height: 30px" alt=""> Professeurs</a></li>
+        <li><a href="../Utilisateur/lister_utilisateur.html"><img src="../icon/user.png" style="width: 30px;height: 30px" alt=""> Utilisateurs</a></li>
+        <li><a href="../Rapport/rapport.html"><img src="../icon/rapport.png" style="width: 30px;height: 30px" alt=""> Rapport</a></li>
+    </ul>
+    <div class="logout">
+        <hr>
+        <img src="../icon/logout.png" style="width: 30px;height: 30px" alt=""> Déconnexion
+    </div>
+</div>
+
+<div class="main-content">
+    <main>
+        <div class="retour-container">
+            <a th:href="@{/students}" class="retour">← Retour</a>
+        </div>
+
+        <h2>Ajouter un élève</h2>
+        <form id="addStudentForm" th:object="${student}" th:action="@{/students}" method="post">
+            <div class="form-row">
+                <input th:field="*{lastName}" type="text" id="nom" placeholder="Nom" required>
+                <input th:field="*{FirstName}" type="text" id="prenom" placeholder="Prénom" required>
+            </div>
+            <!--<div class="form-row">
+                 <div class="radio-group">
+                    <label><input th:field="*{sexe}" type="radio" name="genre" value="true" required> Homme</label>
+                    <label><input th:field="*{sexe}" type="radio" name="genre" value="false" required> Femme</label>
+                </div>
+            </div>-->
+            <div class="form-row">
+                <input th:field="*{matricule}" type="text" id="matricule" placeholder="Matricule" required>
+                <input th:field="*{dateNaissance}" type="date" id="dateNaissance" required>
+            </div>
+            <div class="form-row">
+                <select th:field="*{classe}" id="classe" required>
+                    <option value="">Sélectionner une classe</option>
+                    <option value="1ere">1ère</option>
+                    <option value="2eme">2ème</option>
+                    <option value="3eme">3ème</option>
+                    <option value="4eme">4ème</option>
+                    <option value="5eme">5ème</option>
+                    <option value="6eme">6ème</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <input th:field="*{tel}" type="tel" id="telephone" placeholder="Téléphone">
+                <input th:field="*{ville}" type="text" id="ville" placeholder="Ville">
+                <input th:field="*{email}" type="email" id="email" placeholder="email" required>
+            </div>
+            <div class="form-row buttons">
+                <button type="button" class="btn-cancel">Annuler</button>
+                <button type="submit" class="btn-save">Enregistrer</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script src="../js/Home.js"></script>
+</body>
+</html>
